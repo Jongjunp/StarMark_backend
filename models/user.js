@@ -4,7 +4,6 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  //personal info
   name: {
     type: String,
     required: true
@@ -22,13 +21,6 @@ var userSchema = new Schema({
   nickname:{
     type: String,
     required: true
-  },
-  //relation info
-  friends:{
-    type: [String]
-  },
-  bookmarks:{
-    type: [String]
   }
 });
 

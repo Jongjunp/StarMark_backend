@@ -4,13 +4,17 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var bookmarkSchema = new Schema({
-  //personal info
+  user: {
+    type: String,
+    required: true
+  },
   link: {
     type: String,
     required: true
   },
-  userlist: {
-      type: [String]
+  attr: {
+      type: String,
+      required: true
   }
 });
 
