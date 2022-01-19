@@ -138,11 +138,19 @@ router.post('/users/signup', function(req, res) {
 
 //Log in - local
 router.get('/users/login',function(req,res) {
-    Users.find(
-        req.body
-    );
+    Users.findOne({ email: req.body.email, password: req.body.password }, (err, user) => {
+        if (err) {
+          return res.json({ 'ok': false, 'data':'nodata' });
+         }
+        else if (user) {
+          console.log(user);
+          return res.json({ 'ok': true, 'data':user.nickname});
+        }
+        else {
+          return res.json({ 'ok': false, 'data':'nodata' });
+        }
+      });
 });
-
 
 
 module.exports = router;
