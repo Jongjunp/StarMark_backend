@@ -7,6 +7,9 @@ var mongoose = require('mongoose');
 
 //필요한 라우터 추가 필요
 var userRouter = require('./routes/user');
+var bookmarkRouter = require('./routes/bookmark');
+var recommendRouter = require('./routes/recommend');
+var relationRouter = require('./routes/relation');
 
 var app = express();
 
@@ -22,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //필요한 라우터 추가 필요
 app.use('/', userRouter);
+app.use('/',bookmarkRouter);
+app.use('/', recommendRouter);
+app.use('/', relationRouter);
 
 //mongodb connection
 mongoose.connect(

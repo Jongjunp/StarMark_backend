@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 const shortid = require('shortid');
-const app = require('../app');
 const passport = require('passport')
 ,GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
@@ -77,10 +76,10 @@ passport.use(new GoogleStrategy({
 ));
 
 /* Google login */
-//1. google page 이동
+//google page 이동
 router.get('/auth/google',passport.authenticate('google', { scope: ['email','profile'] }));
 
-//2. callback 페이지 구성
+//callback 페이지 구성
 router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/auth/login' }),
   function(req, res) {
@@ -88,8 +87,7 @@ router.get('/auth/google/callback',
 });
 
 
-//3. 로그아웃 페이지 : 로그 아웃 처리 + 세션 삭제 + 쿠키 삭제 후 홈으로 리다이렉션
-//passport 패키지로 인해 req.logout()으로 로그아웃 기능 구현 가능
+//Logout - Google
 router.get('/auth/logout',(req,res,next)=>{
     req.session.destroy((err)=>{
         if(err) next(err);
@@ -142,5 +140,15 @@ router.get('/users/login',function(req,res) {
       });
 });
 
+
+//Log out - local
+router.get('/users/logout', function(req,res) {
+    req.session.destroy((err)=>{
+        if(err) next(err);
+        req.logOut();
+        res.cookie(`connect.sid`,``,{maxAge:0});
+        res.redirect('/');
+    });
+});
 
 module.exports = router;
