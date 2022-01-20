@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var bookmarkSchema = new Schema({
-  user: {
+  email: {
     type: String,
     required: true
   },
@@ -13,8 +13,8 @@ var bookmarkSchema = new Schema({
     required: true
   },
   attr: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
   memo: {
     type: String

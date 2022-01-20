@@ -134,7 +134,7 @@ router.get('/users/login',function(req,res) {
          }
         else if (user) {
           console.log(user);
-          return res.json({ 'ok': true, 'data':user.nickname});
+          return res.json({ 'ok': true, 'data':[user.nickname, user.email]});
         }
         else {
           return res.json({ 'ok': false, 'data':'nodata' });
