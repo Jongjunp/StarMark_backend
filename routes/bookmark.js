@@ -1,34 +1,26 @@
-var express = require('express');
-var router = express.Router();
-const app = require('../app');
-const request = require('request');
-var Bookmarks = require('../models/bookmark');
+const express = require("express");
+const router = express.Router();
+const { readAllBookmarks, 
+    addBookmark,
+    putMemo,
+    modifAttr,
+    delBookmark } = require('../controllers/bookmark');
+const { isAuth } = require('../middleware');
 
-//show all the bookmarks
-router.get('/bookmark/1', function(req,res) {
-    Bookmarks.find(req.body.nickname);
-    Bookmarks
-});
+
+//read all the bookmarks
+router.get('/bookmark/1',isAuth,readAllBookmarks);
 
 //add bookmarks
-router.post('/bookmark/2', function(req,res) {
-    var localNickname = req.body.nickname;
-    var localEmail = req.body.email;
-});
+router.post('/bookmark/2',isAuth, addBookmark);
 
 //put memo
-router.put('/bookmark/memo/1', function(req,res) { 
-    var localNickname = req.body.memo;
-});
+router.put('/bookmark/memo',isAuth, putMemo);
 
-//modify memo
-router.put('/bookmark/memo/2', function(req,res) {
-    var
-});
+//modify attribute
+router.put('/bookmark/attr',isAuth, modifAttr);
 
 //delete bookmark
-router.delete('/bookmark/3', function(req,res) {
-    var 
-});
+router.delete('/bookmark/3',isAuth, delBookmark);
 
 module.exports = router;
