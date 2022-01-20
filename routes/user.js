@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 const shortid = require('shortid');
 const passport = require('passport')
 ,GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 
 
 //google login setting

@@ -4,14 +4,18 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var bookmarkSchema = new Schema({
-  originlink: {
-    type: String,
-    required: true
-  },
-  relatedlink: {
-    type: String,
-    required: true
-  }
+    email: {
+        type: String,
+        required: true
+    },
+    originlink: {
+        type: String,
+        required: true
+    },
+    relatedlink: {
+        type: String,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('bookmark', bookmarkSchema);
