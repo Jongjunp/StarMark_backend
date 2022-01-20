@@ -18,7 +18,8 @@ var bookmarkSchema = new Schema({
   },
   memo: {
     type: String
-  }
+  },
+  
 });
 
 module.exports = mongoose.model('bookmark', bookmarkSchema);
