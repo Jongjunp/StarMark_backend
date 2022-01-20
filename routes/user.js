@@ -6,18 +6,8 @@ const app = require('../app');
 const passport = require('passport')
 ,GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-//mongodb connection
-mongoose.connect(
-    "mongodb://localhost:27017/board",
-    {useNewUrlParser: true}
-  );
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('connected successfully');
-});
-
+//google login setting
 const googleCredentials = {
     "web": {
         "client_id": "562553561444-9f0gvsveidoq9fp59qh22l83oohl2s0b.apps.googleusercontent.com",
@@ -100,7 +90,7 @@ router.get('/auth/google/callback',
 
 //3. 로그아웃 페이지 : 로그 아웃 처리 + 세션 삭제 + 쿠키 삭제 후 홈으로 리다이렉션
 //passport 패키지로 인해 req.logout()으로 로그아웃 기능 구현 가능
-app.get('/auth/logout',(req,res,next)=>{
+router.get('/auth/logout',(req,res,next)=>{
     req.session.destroy((err)=>{
         if(err) next(err);
         req.logOut();

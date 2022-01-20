@@ -15,6 +15,9 @@ var bookmarkSchema = new Schema({
   attr: {
       type: String,
       required: true
+  },
+  memo: {
+    type: String
   }
 });
 

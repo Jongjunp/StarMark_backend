@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 //필요한 라우터 추가 필요
-var postRouter = require('./routes/user');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -19,7 +20,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', postRouter);
+//필요한 라우터 추가 필요
+app.use('/', userRouter);
+
+//mongodb connection
+mongoose.connect(
+  "mongodb://localhost:27017/board",
+  {useNewUrlParser: true}
+);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected successfully');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
