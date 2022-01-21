@@ -77,6 +77,15 @@ const signOut = async(req, res, next) => {
     next(err);
   }
 };
+
+const test = async(req, res, next) => {
+  try {
+    res.send({ test:"hi" });
+    console.log("respond ok");
+  } catch (err) {
+    next(err);
+  }
+};
   
 
-module.exports = { signUp, signIn, signOut }; // signUp 함수를 module 로 내보낸다.
+module.exports = { signUp, signIn, signOut,test }; // signUp 함수를 module 로 내보낸다.

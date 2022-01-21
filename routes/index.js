@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router(); 
 const { signUp, 
     signIn, 
-    signOut } = require("../controllers/user"); 
+    signOut,
+    test } = require("../controllers/user"); 
 const { readAllRelations, 
     addRelation,
     modifRelationAttr,
@@ -22,19 +23,21 @@ router.post("/signup", signUp);
 router.post("/signin", signIn);
 //local sign out request
 router.get("/signout", isAuth, signOut);
+//test
+router.get("/api", test);
 
 //read all the bookmarks
 router.get('/bookmark/1',isAuth, readAllBookmarks);
 //read a bookmark
 router.get('bookmark/2',isAuth, readOneBookmark);
 //add bookmarks
-router.post('/bookmark/2',isAuth, addBookmark);
+router.post('/bookmark/3',isAuth, addBookmark);
 //put memo
 router.put('/bookmark/memo',isAuth, putMemo);
 //modify attribute
 router.put('/bookmark/attr',isAuth, modifBookmarkAttr);
 //delete bookmark
-router.delete('/bookmark/3',isAuth, delBookmark);
+router.delete('/bookmark/4',isAuth, delBookmark);
 
 
 //read all the bookmarks
