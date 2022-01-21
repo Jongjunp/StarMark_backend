@@ -35,7 +35,6 @@ const signUp = async (req, res, next) => { // signUp 하는 로직
     const { email } = req.body; // POST 메소드로 들어온 요청의 데이터(body) 에서 email 을 destructuring 한다.
     const user = await User.findOne({ email }); // email 의 정보를 가지고 Users 콜렉션에서 조회한다.
     if (user) errorGenerator("email 중복입니다. 다시 입력해주세요.", 404); // 중복 될 시에 에러 발생시킴
-  
     await createUserData(req.body); // 위에서 정의한 함수로 POST메소드로 들어온 데이터(body)를 보낸다.
     res.status(201).json({ message: "User created" }); // user가 생성되었다는 메세지를 응답으로 보낸다.
   } catch (err) {
@@ -62,8 +61,20 @@ const signIn = async (req, res, next) => {
     } catch (err) {
       next(err);
     }
-  };
+};
+
+const signOut = async(req, res, next) => {
+  try {
+    const token = req.get("Authorization");
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const { _id } = decodedToken;
+    const user = await User.findOne({ _id });
+    if (!user) errorGenerator("Not found user", "404");
+    res.status(201).json({ message: "Delete Token" })
+  } catch (err) {
+    next(err);
+  }
+};
   
 
-
-module.exports = { signUp, signIn }; // signUp 함수를 module 로 내보낸다.
+module.exports = { signUp, signIn, signOut }; // signUp 함수를 module 로 내보낸다.

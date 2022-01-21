@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken"); 
 const User = require("../models/user"); 
-const { errorGenerator } = require("../utils"); // 이전 포스트 참고 (에러 생성시키는 함수)
+
+const errorGenerator = (message, statusCode = 500) => { // error 를 핸들링 하는 함수
+  const error = new Error(message); // error 객체를 생성
+  error.statusCode = statusCode;
+  throw error; // error 를 핸들링 하는 하는 미들웨어로 에러를 던진다.
+};
 
 module.exports = async (req, res, next) => { 
   try {

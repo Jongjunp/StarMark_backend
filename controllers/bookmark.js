@@ -9,7 +9,7 @@ const errorGenerator = (message, statusCode = 500) => { // error 를 핸들링 �
 //read all the bookmarks
 const readAllBookmarks = async (req,res,next) => {
     try {
-        const { email } = req.user;
+        const { email } = req.body;
         const bookmark = await Bookmark.find({ 'email':email });
         res.status(201).json({ message: "Load complete", bookmark });
     } catch(err) {
