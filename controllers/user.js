@@ -32,6 +32,7 @@ const errorGenerator = (message, statusCode = 500) => { // error 를 핸들링 �
 
 const signUp = async (req, res, next) => { // signUp 하는 로직
   try {
+    console.log("SignUp request");
     const { email } = req.body; // POST 메소드로 들어온 요청의 데이터(body) 에서 email 을 destructuring 한다.
     const user = await User.findOne({ email }); // email 의 정보를 가지고 Users 콜렉션에서 조회한다.
     if (user) errorGenerator("email 중복입니다. 다시 입력해주세요.", 404); // 중복 될 시에 에러 발생시킴
@@ -50,6 +51,7 @@ const createToken = (userId) => {
 
 const signIn = async (req, res, next) => {
     try {
+      console.log("SignIn request");
       const { email = null, password = null } = req.body; // POST 메소드로 들어온 요청의 데이터(body)에서 email, password 를 destructuring 한다.
       if (!email || !password) errorGenerator("Invalid inputs", 400); // input 으로 들어오지 않은 경우에 잘못된 인풋이라는 에러를 던진다.
       const user = await User.findOne({ email }); // email 로 조회한다.

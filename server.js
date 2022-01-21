@@ -5,21 +5,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 const http = require("http");
+const app = require('./app');
 const server = http.createServer(app);
 
 (async function () {
     try {
       // db connection
-      await mongoose.connect("mongodb://localhost:27017/board", {  // MONGO_URL 엔 각자 자신의 mongdoDB 를 연결하는 주소를 적으면 된다.
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true
-      });
+      console.log("test");
+      await mongoose.connect("mongodb://localhost:27017/starmark");
   
       console.log("DB CONNECTED");
-      server.listen(8000, () => // 서버 실행
-        console.log("Server is listening to port: ", 8000)
+      server.listen(80, '192.249.18.163', () => // 서버 실행
+        console.log("Server is listening to port: ", 80)
       );
     } catch (err) {
       console.log("DB CONNECTION ERROR");

@@ -42,7 +42,7 @@ const addRelation = async (req,res,next) => {
 
 
 //modify attribute
-const modifAttr = async (req,res,next) => {
+const modifRelationAttr = async (req,res,next) => {
     try {
         const { myemail,othersemail,attr } = req.body;
         const relation = await Relation.findOneAndUpdate({ 'myemail':myemail,'othersemail':othersemail },
@@ -71,6 +71,6 @@ const delRelation = async (req,res,next) => {
 //export
 module.exports = { readAllRelations, 
     addRelation,
-    modifAttr,
+    modifRelationAttr,
     delRelation
 };

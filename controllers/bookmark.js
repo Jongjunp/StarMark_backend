@@ -56,7 +56,7 @@ const putMemo = async (req,res,next) => {
 }
 
 //modify attribute
-const modifAttr = async (req,res,next) => {
+const modifBookmarkAttr = async (req,res,next) => {
     try {
         const { email,link,attr,memo } = req.body;
         const bookmark = await Bookmark.findOneAndUpdate({ 'email':email,'link':link },
@@ -86,6 +86,6 @@ const delBookmark = async (req,res,next) => {
 module.exports = { readAllBookmarks, 
     addBookmark,
     putMemo,
-    modifAttr,
+    modifBookmarkAttr,
     delBookmark
 };
