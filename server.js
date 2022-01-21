@@ -15,7 +15,7 @@ const server = http.createServer(app);
       await mongoose.connect("mongodb://localhost:27017/starmark");
   
       console.log("DB CONNECTED");
-      server.listen(80, '192.249.18.163', () => // 서버 실행
+      server.listen(80, () => // 서버 실행
         console.log("Server is listening to port: ", 80)
       );
     } catch (err) {
