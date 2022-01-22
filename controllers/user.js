@@ -3,6 +3,13 @@ const bcrypt = require("bcryptjs"); // 유저가 입력한 password 를 암호�
 const jwt = require("jsonwebtoken");
 require('dotenv').config();//.env 사용
 
+//google signin
+const googleSign = async (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
+  return done(null, profile);
+}
+
+
 //sign up
 const createUserData = async (userInput) => { // user를 객체화하고 Database에 저장하는 함수
   const user = await userWithEncodePassword(userInput); // input 을 인자로 넘겨주고, 암호화된 정보가 담긴 객체를 결과로 받는다. 
@@ -83,4 +90,4 @@ const signOut = async(req, res, next) => {
 };
   
 
-module.exports = { signUp, signIn, signOut }; // signUp 함수를 module 로 내보낸다.
+module.exports = { googleSign,signUp, signIn, signOut }; // signUp 함수를 module 로 내보낸다.

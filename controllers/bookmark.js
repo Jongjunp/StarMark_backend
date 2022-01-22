@@ -9,7 +9,7 @@ const errorGenerator = (message, statusCode = 500) => { // error 를 핸들링 �
 //read all the bookmarks
 const readAllBookmarks = async (req,res,next) => {
     try {
-        const { email } = req.body;
+        const { email } = req.query;
         const bookmarks = await Bookmark.find({ 'email':email });
         res.status(201).json({ message: "Load complete", bookmarks });
     } catch(err) {
@@ -20,7 +20,7 @@ const readAllBookmarks = async (req,res,next) => {
 //read a specific bookmark
 const readOneBookmark = async (req,res,next) => {
     try {
-        const { email,link  } = req.body;
+        const { email,link  } = req.query;
         const bookmark = await Bookmark.findOne({ 'email':email,'link':link });
         if(!bookmark) errorGenerator("There isn't corresponding bookmark!", 404);
         res.status(201).json({ message: "Find Bookmark", bookmark });
