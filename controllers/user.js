@@ -83,11 +83,26 @@ const signOut = async(req, res, next) => {
     const { _id } = decodedToken;
     const user = await User.findOne({ _id });
     if (!user) errorGenerator("Not found user", "404");
-    res.status(201).json({ message: "Delete Token" })
+    res.status(201).json({ message: "Delete Token" });
+    res.redirect('/');
   } catch (err) {
     next(err);
   }
 };
+
+const userInfoModif = async(req,res,next) => {
+  try {
+    const token = req.get("Authorization");
+    const { nickname } = req.body;
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const { _id } = decodedToken;
+    const user = await User.updateOne({ "_id":_id },{"$set":{ "nickname":nickname }});
+    if (!user) errorGenerator("Not found user", "404");
+    res.status(201).json({ message: "Modification success!" });
+  } catch (err) {
+    next(err);
+  }
+}
   
 
-module.exports = { googleSign,signUp, signIn, signOut }; // signUp 함수를 module 로 내보낸다.
+module.exports = { googleSign,signUp, signIn, signOut, userInfoModif }; // signUp 함수를 module 로 내보낸다.

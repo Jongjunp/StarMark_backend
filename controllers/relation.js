@@ -6,10 +6,10 @@ const errorGenerator = (message, statusCode = 500) => { // error 를 핸들링 �
     throw error; // error 를 핸들링 하는 하는 미들웨어로 에러를 던진다.
 };
 
-//read all the bookmarks
+//read all the relations
 const readAllRelations = async (req,res,next) => {
     try {
-        const { myemail } = req.body;
+        const { myemail } = req.query;
         const relation = await Relation.find({ 'myemail':myemail });
         res.status(201).json({ message: "Load complete", relation });
     } catch(err) {
@@ -17,7 +17,19 @@ const readAllRelations = async (req,res,next) => {
     }
 }
 
-//create a bookmark
+//read a relation
+const readOneRelation = async (req,res,next) => {
+    try {
+        const { myemail,othersemail  } = req.query;
+        const relation = await Relation.findOne({ 'myemail':myemail,'othersemail':othersemail });
+        if(!relation) errorGenerator("There isn't corresponding relation!", 404);
+        res.status(201).json({ message: "Find a relation", relation });
+    } catch(err) {
+        next(err);
+    }
+}
+
+//create a relation
 const _createRelation = async ({myemail,othersemail,attr}) => {
     const relation = new Relation({
         myemail: myemail,
@@ -27,13 +39,13 @@ const _createRelation = async ({myemail,othersemail,attr}) => {
     return relation.save();
 };
 
-//add a bookmark
+//add a relation
 const addRelation = async (req,res,next) => {
     try {
         const { myemail,othersemail } = req.body;
         const relation = await Relation.findOne({ 'myemail':myemail,'othersemail':othersemail });
         if (relation) errorGenerator("You already have a relation", 404);
-        await _createBookmark(req.body);
+        await _createRelation(req.body);
         res.status(201).json({ message: "Relation created" });
     } catch(err) {
         next(err);
@@ -55,7 +67,7 @@ const modifRelationAttr = async (req,res,next) => {
     }
 }
 
-//delete bookmark
+//delete relation
 const delRelation = async (req,res,next) => {
     try {
         const { myemail,othersemail } = req.body;
@@ -69,7 +81,8 @@ const delRelation = async (req,res,next) => {
 
 
 //export
-module.exports = { readAllRelations, 
+module.exports = { readAllRelations,
+    readOneRelation, 
     addRelation,
     modifRelationAttr,
     delRelation

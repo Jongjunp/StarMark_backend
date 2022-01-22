@@ -5,8 +5,10 @@ const mongoDBStore = require('express-mongodb-session')(session);
 const { googleSign,
     signUp, 
     signIn, 
-    signOut } = require("../controllers/user"); 
-const { readAllRelations, 
+    signOut,
+    userInfoModif } = require("../controllers/user"); 
+const { readAllRelations,
+    readOneRelation, 
     addRelation,
     modifRelationAttr,
     delRelation } = require('../controllers/relation');
@@ -100,6 +102,8 @@ router.post("/users/signup", signUp);
 router.get("/users/signin", signIn);
 //local sign out request
 router.get("/users/signout", isAuth, signOut);
+//nickname modification
+router.put("/users/modif", isAuth, userInfoModif);
 
 
 //read all the bookmarks
@@ -116,13 +120,15 @@ router.put('/bookmarks/attr',isAuth, modifBookmarkAttr);
 router.delete('/bookmarks/4',isAuth, delBookmark);
 
 
-//read all the bookmarks
+//read all the relations
 router.get('/relations/1',isAuth,readAllRelations);
-//add bookmarks
+//read ont relation
+router.get('/relation/2',isAuth, readOneRelation);
+//add a relation
 router.post('/relations/2',isAuth, addRelation);
 //modify attribute
 router.put('/relations/attr',isAuth, modifRelationAttr);
-//delete bookmark
+//delete relation
 router.delete('/relations/3',isAuth, delRelation);
 
 module.exports = router;
