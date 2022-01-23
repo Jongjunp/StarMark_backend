@@ -19,7 +19,18 @@ var bookmarkSchema = new Schema({
   memo: {
     type: String
   },
-  
+  x_coor: {
+    type: Number,
+    required: true
+  },
+  y_coor: {
+    type: Number,
+    required: true
+  },
+  z_coor: {
+    type: Number,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('bookmark', bookmarkSchema);

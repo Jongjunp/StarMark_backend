@@ -30,12 +30,15 @@ const readOneBookmark = async (req,res,next) => {
 }
 
 //create a bookmark
-const _createBookmark = async ({email,link,attr,memo}) => {
+const _createBookmark = async ({email,link,attr,memo,x_coor,y_coor,z_coor}) => {
     const bookmark = new Bookmark({
-        email: email,
-        link: link,
-        attr: attr,
-        memo: memo
+        email,
+        link,
+        attr,
+        memo,
+        x_coor,
+        y_coor,
+        z_coor
     });
     return bookmark.save();
 };
