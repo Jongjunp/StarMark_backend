@@ -26,10 +26,6 @@ var bookmarkSchema = new Schema({
   y_coor: {
     type: Number,
     required: true
-  },
-  z_coor: {
-    type: Number,
-    required: true
   }
 });
 

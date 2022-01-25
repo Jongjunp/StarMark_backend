@@ -69,7 +69,7 @@ const signIn = async (req, res, next) => {
       const passwordCheck = await bcrypt.compare(password, user.password); // bcrypt compare 함수로 입력된 비밀번호와 암호화되어서 저장된 비밀번호를 비교한다.
       if (!passwordCheck) errorGenerator("Wrong password", 404); // 암호가 같지 않을 경우에 잘못된 패스워드라는 메시지로 에러를 던진다.
       const token = createToken(user._id); // user 도큐먼트(객체)의 고유한 id로 토큰을 만든다.
-      res.status(201).json({ message: "Welcome", token }); // token 을 response로 넘겨준다.
+      res.status(201).json({ 'message': "Welcome", 'token':token, 'email':email }); // token 을 response로 넘겨준다.
       console.log(token);
     } catch (err) {
       next(err);

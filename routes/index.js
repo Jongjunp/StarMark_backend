@@ -95,40 +95,39 @@ router.get('/auth/logout',(req,res,next)=>{
 });
 
 
-
 //local sign up request
-router.post("/users/signup", signUp);
+router.post("/api/users/signup", signUp);
 //local sign in request
-router.get("/users/signin", signIn);
+router.get("/api/users/signin", signIn);
 //local sign out request
-router.get("/users/signout", isAuth, signOut);
+router.get("/api/users/signout", isAuth, signOut);
 //nickname modification
-router.put("/users/modif", isAuth, userInfoModif);
+router.put("/api/users/modif", isAuth, userInfoModif);
 
 
 //read all the bookmarks
-router.get('/bookmarks/1',isAuth, readAllBookmarks);
+router.get('/api/bookmarks/1',isAuth, readAllBookmarks);
 //read a bookmark
-router.get('bookmarks/2',isAuth, readOneBookmark);
+router.get('/api/bookmarks/2',isAuth, readOneBookmark);
 //add bookmarks
-router.post('/bookmarks/3',isAuth, addBookmark);
+router.post('/api/bookmarks/3', isAuth ,addBookmark);
 //put memo
-router.put('/bookmarks/memo',isAuth, putMemo);
+router.put('/api/bookmarks/memo',isAuth, putMemo);
 //modify attribute
-router.put('/bookmarks/attr',isAuth, modifBookmarkAttr);
+router.put('/api/bookmarks/attr',isAuth, modifBookmarkAttr);
 //delete bookmark
-router.delete('/bookmarks/4',isAuth, delBookmark);
+router.delete('/api/bookmarks/4',isAuth, delBookmark);
 
 
 //read all the relations
-router.get('/relations/1',isAuth,readAllRelations);
+router.get('/api/relations/1',isAuth,readAllRelations);
 //read ont relation
-router.get('/relation/2',isAuth, readOneRelation);
+router.get('/api/relation/2',isAuth, readOneRelation);
 //add a relation
-router.post('/relations/2',isAuth, addRelation);
+router.post('/api/relations/2',isAuth, addRelation);
 //modify attribute
-router.put('/relations/attr',isAuth, modifRelationAttr);
+router.put('/api/relations/attr',isAuth, modifRelationAttr);
 //delete relation
-router.delete('/relations/3',isAuth, delRelation);
+router.delete('/api/relations/3',isAuth, delRelation);
 
 module.exports = router;
