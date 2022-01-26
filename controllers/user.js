@@ -84,7 +84,6 @@ const findUser = async (req, res, next) => {
     if (!user) errorGenerator("User not found", 404); // user 가 없을 경우에 error 를 발생시킨다.
     const _nickname = user.nickname;
     res.status(201).json({ 'message': "Found", 'nickname':_nickname }); // token 을 response로 넘겨준다.
-    console.log(_nickname);
   } catch (err) {
     next(err);
   }
