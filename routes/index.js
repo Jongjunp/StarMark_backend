@@ -6,6 +6,7 @@ const { googleSign,
     signUp, 
     signIn, 
     signOut,
+    findUser,
     userInfoModif } = require("../controllers/user"); 
 const { readAllRelations,
     readOneRelation, 
@@ -101,16 +102,18 @@ router.post("/api/users/signup", signUp);
 router.get("/api/users/signin", signIn);
 //local sign out request
 router.get("/api/users/signout", isAuth, signOut);
+//finding user
+router.get("/api/users/finduser", isAuth, findUser);
 //nickname modification
 router.put("/api/users/modif", isAuth, userInfoModif);
 
 
 //read all the bookmarks
-router.get('/api/bookmarks/1',isAuth, readAllBookmarks);
+router.get('/api/bookmarks/1', isAuth, readAllBookmarks);
 //read a bookmark
-router.get('/api/bookmarks/2',isAuth, readOneBookmark);
+router.get('/api/bookmarks/2', isAuth, readOneBookmark);
 //add bookmarks
-router.post('/api/bookmarks/3', isAuth ,addBookmark);
+router.post('/api/bookmarks/3', isAuth, addBookmark);
 //put memo
 router.put('/api/bookmarks/memo',isAuth, putMemo);
 //modify attribute

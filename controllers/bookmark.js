@@ -30,11 +30,11 @@ const readOneBookmark = async (req,res,next) => {
 }
 
 //create a bookmark
-const _createBookmark = async ({email,link,attr,memo,x_coor,y_coor}) => {
+const _createBookmark = async ({email,bookmarkname,link,attr,memo,x_coor,y_coor}) => {
     const bookmark = new Bookmark({
         email,
+        bookmarkname,
         link,
-        attr,
         memo,
         x_coor,
         y_coor
@@ -90,7 +90,7 @@ const delBookmark = async (req,res,next) => {
         const bookmark = await Bookmark.findOneAndDelete({ 'email':email,'link':link });
         if (!bookmark) errorGenerator("No corresponding bookmark", 404);
         res.status(201).json({ message: "Successfully deleted" }); 
-    } catch {
+    } catch(err) {
         next(err);
     }
 }

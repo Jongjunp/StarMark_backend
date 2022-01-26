@@ -8,11 +8,11 @@ var bookmarkSchema = new Schema({
     type: String,
     required: true
   },
-  link: {
+  bookmarkname: {
     type: String,
     required: true
   },
-  attr: {
+  link: {
     type: String,
     required: true
   },

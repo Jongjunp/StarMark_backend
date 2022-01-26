@@ -76,6 +76,20 @@ const signIn = async (req, res, next) => {
     }
 };
 
+const findUser = async (req, res, next) => {
+  try {
+    const { email } = req.query; // GET 메소드로 들어온 요청의 데이터(query)에서 email, password 를 destructuring 한다.
+    if (!email) errorGenerator("Invalid inputs", 400); // input 으로 들어오지 않은 경우에 잘못된 인풋이라는 에러를 던진다.
+    const user = await User.findOne({ email }); // email 로 조회한다.
+    if (!user) errorGenerator("User not found", 404); // user 가 없을 경우에 error 를 발생시킨다.
+    const _nickname = user.nickname;
+    res.status(201).json({ 'message': "Found", 'nickname':_nickname }); // token 을 response로 넘겨준다.
+    console.log(_nickname);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const signOut = async(req, res, next) => {
   try {
     const token = req.get("Authorization");
@@ -105,4 +119,4 @@ const userInfoModif = async(req,res,next) => {
 }
   
 
-module.exports = { googleSign,signUp, signIn, signOut, userInfoModif }; // signUp 함수를 module 로 내보낸다.
+module.exports = { googleSign,signUp, signIn, signOut, findUser, userInfoModif }; // signUp 함수를 module 로 내보낸다.
